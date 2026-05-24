@@ -9,6 +9,82 @@ All notable changes to PicoClaw are documented here.
 
 ---
 
+## v0.2.8
+
+*Released: 2026-04-30*
+
+### Highlights
+
+- **TUI Removal**: Legacy terminal UI removed, replaced by lightweight CLI interaction mode (#2710)
+- **Cross-Platform Serial Tool**: Native serial port interaction for embedded hardware debugging across Windows/macOS/Linux (#2673)
+- **MCP Enhancement**: Complete MCP CLI command system with HTTP session management and local service support
+- **Unified UX**: Channel-wide tool feedback animations, thinking visibility toggle, and config save restart prompt
+- **Custom Model Endpoints**: CLI support for custom OpenAI-compatible endpoint configuration
+
+### Features
+
+#### Core & Agent
+- Structured prompt layering with capability-slot tool prompt management (#2656)
+- Native `tool_calls` field support in chat messages
+- Unified reasoning and tool-call visibility control (global or per-session toggle)
+- MCP slash commands and tool detail queries for third-party tool debugging
+
+#### Tools
+- Cross-platform serial hardware tool for Windows/macOS/Linux serial interaction (#2673)
+- MCP CLI management commands: show/add/list/remove/test/edit
+- Web file download from chat interface
+- Tool feedback independent message mode with JSON parameter code block display
+
+#### Interaction & UI
+- Thinking content visibility toggle (hide/show Agent reasoning)
+- Config save restart prompt to avoid stale settings
+- Unified cross-channel tool call animation feedback with auto-dismiss
+- Tool feedback content deduplication
+
+#### CI/CD & Build
+- Split tag creation and release into independent workflows
+- Stale bot for auto-closing inactive Issues and PRs
+- macOS CGO builds now run in parallel
+- Docker image tags normalized to lowercase
+
+### Bug Fixes
+
+- Fixed MCP tool call sending null instead of empty object
+- Fixed MCP HTTP session retry logic and client lifecycle management
+- Fixed MCP local stdio server home directory path expansion
+- Fixed MCP initialization failure silent error — now reports to command handler
+- Fixed multiple Windows build failures
+- Fixed Docker build for Go version changes
+- Fixed Windows launcher subprocess console flashing
+- Fixed Darwin serial tool cross-compilation
+- Optimized Unix serial cancel and timeout polling
+- Optimized Windows serial I/O handling
+- Fixed Telegram OAuth link HTML escaping
+- Fixed Feishu image download API fallback with upload support
+- Fixed cron task sessionKey propagation
+- Fixed Feishu message attachment display with card/file reply context enrichment
+- Fixed DeepSeek v4 thinking history loss
+- Fixed tool call display misalignment in thinking UI
+- Fixed Seahorse SQLite reasoning_content persistence
+- Fixed DeepSeek and web chat canonical history persistence
+- Fixed launcher localization contaminating shared web-search routes
+- Multiple code deduplication passes
+- Fixed govet shadow declarations
+- Improved config error messages with precise format diagnostics
+- Improved web search provider fallback logic
+- Fixed PID=1 singleton check for container environments
+
+### Build & Ops
+
+- AWS SDK upgraded (bedrockruntime, config)
+- Lark SDK upgraded
+- zerolog 1.35.0 → 1.35.1
+- Frontend dependencies: i18next, react-i18next, typescript-eslint, vite upgraded
+
+### Full changelog
+- [GitHub v0.2.7...v0.2.8](https://github.com/sipeed/picoclaw/compare/v0.2.7...v0.2.8)
+---
+
 ## v0.2.7
 
 *Released: 2026-04-22*
