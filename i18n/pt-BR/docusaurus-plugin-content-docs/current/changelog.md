@@ -9,6 +9,80 @@ Todas as mudanças notáveis do PicoClaw são documentadas aqui.
 
 ---
 
+## v0.2.8
+
+*Lançado: 2026-04-30*
+
+### Destaques
+
+- **Remoção da TUI**: UI de terminal legada removida, substituída por modo de interação CLI leve (#2710)
+- **Ferramenta serial multiplataforma**: Interação nativa com porta serial para depuração de hardware embarcado em Windows/macOS/Linux (#2673)
+- **Aprimoramento do MCP**: Sistema completo de comandos CLI para MCP com gerenciamento de sessão HTTP e suporte a serviço local
+- **UX unificada**: Animações de feedback de ferramenta em todos os canais, toggle de visibilidade de raciocínio e prompt de reinício ao salvar configuração
+- **Endpoints de modelo customizados**: Suporte CLI para configuração de endpoints OpenAI compatíveis customizados
+
+### Funcionalidades
+
+#### Core & Agent
+- Camadas de prompt estruturado com gerenciamento de prompts de ferramentas por capability-slot (#2656)
+- Suporte nativo ao campo `tool_calls` em mensagens de chat
+- Controle unificado de visibilidade de raciocínio e chamadas de ferramentas (global ou por sessão)
+- Comandos slash MCP e consultas de detalhes de ferramentas para depuração de ferramentas de terceiros
+
+#### Ferramentas
+- Ferramenta de hardware serial multiplataforma para Windows/macOS/Linux (#2673)
+- Comandos CLI completos para gerenciamento MCP: show/add/list/remove/test/edit
+- Download de arquivos via interface web
+- Modo de mensagem independente para feedback de ferramentas com exibição de blocos de código JSON
+
+#### Interação & UI
+- Toggle de visibilidade de conteúdo de raciocínio
+- Prompt de reinício após salvar configuração
+- Feedback unificado de animação de chamada de ferramentas em todos os canais
+- Deduplicação automática de conteúdo de feedback de ferramentas
+
+#### CI/CD & Build
+- Separação de criação de tag e release em workflows independentes
+- Stale bot para fechamento automático de Issues e PRs inativos
+- Builds CGO para macOS agora executados em paralelo
+- Tags de imagem Docker normalizadas para minúsculas
+
+### Correções de Bugs
+
+- Correção de chamada de ferramenta MCP enviando null em vez de objeto vazio
+- Correção da lógica de retentativa de sessão HTTP MCP e gerenciamento de ciclo de vida do cliente
+- Correção da expansão de caminho de diretório home em servidor stdio local MCP
+- Correção de erro silencioso na inicialização MCP — agora reporta ao handler de comandos
+- Correção de múltiplas falhas de build no Windows
+- Correção do build Docker para mudanças de versão do Go
+- Correção de flash de console do subprocesso do launcher no Windows
+- Correção de cross-compilation da ferramenta serial para Darwin
+- Otimização do cancelamento e polling de timeout para serial em Unix
+- Otimização do tratamento de I/O serial no Windows
+- Correção de escape HTML em link OAuth do Telegram
+- Correção do fallback da API de download de imagem Feishu com suporte a upload
+- Correção da propagação de sessionKey em tarefas cron
+- Correção da exibição de anexos de mensagem Feishu
+- Correção da perda de histórico de raciocínio DeepSeek v4
+- Correção do desalinhamento de exibição de chamada de ferramenta na UI de raciocínio
+- Correção da persistência de reasoning_content no SQLite Seahorse
+- Correção de contaminação de rotas web-search compartilhadas por localização do launcher
+- Múltiplas passadas de deduplicação de código
+- Correção de declarações shadow no govet
+- Melhoria nas mensagens de erro de configuração e lógica de fallback de web search
+- Correção da verificação de singleton em PID=1 para ambientes de container
+
+### Build e Ops
+
+- AWS SDK atualizado (bedrockruntime, config)
+- Lark SDK atualizado
+- zerolog 1.35.0 → 1.35.1
+- Dependências frontend atualizadas: i18next, react-i18next, typescript-eslint, vite
+
+### Changelog completo
+- [GitHub v0.2.7...v0.2.8](https://github.com/sipeed/picoclaw/compare/v0.2.7...v0.2.8)
+---
+
 ## v0.2.7
 
 *Lançado: 2026-04-22*
