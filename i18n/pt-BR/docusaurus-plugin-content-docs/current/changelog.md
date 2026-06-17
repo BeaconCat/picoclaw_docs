@@ -9,6 +9,72 @@ Todas as mudanças notáveis do PicoClaw são documentadas aqui.
 
 ---
 
+## v0.3.0
+
+*Lançado: 2026-06-15*
+
+### Destaques
+
+- **Confiabilidade e Robustez**: Ampla revisão de robustez em agent, tools, channels e context — guards seguros de type assertion, tratamento explícito de erros de `Close()`, proteção contra panic e retry de erros transitórios de LLM (#2991)
+- **Expansão de Providers**: Provider nativo de busca web Kagi e autenticação por managed identity (Entra ID) do Azure OpenAI (#3037, #2971)
+- **Console Web**: Colar e arrastar-e-soltar imagens no chat, números de linha em blocos de código com alternância de quebra e dica de shift-enter no compositor (#2933)
+- **Ferramenta Cron**: Adicionadas ações `get` e `update` com controle de acesso por channel
+- **Segurança**: Reforço do controle de acesso do launcher, guard de SSRF estendido para 198.18.0.0/15 e guard de workspace para URLs sem scheme (#3085)
+
+### Recursos
+
+#### Providers e Modelos
+- Provider nativo de busca web Kagi (#3037)
+- Autenticação por managed identity (Entra ID) do Azure OpenAI (#2971)
+- Mapeamento de campos de thinking do DeepSeek para streaming compatível com OpenAI (#2928)
+- Catálogo CommonModels para o provider MiMo (#2915)
+- ID canônico do modelo Claude Sonnet (#3036)
+
+#### Console Web
+- Colar e arrastar-e-soltar imagens no chat (#2939)
+- Números de linha e alternância de quebra em blocos de código (#2933)
+- Dica de shift-enter abaixo do compositor de chat
+
+#### Núcleo e Agent
+- Ações `get`/`update` da ferramenta cron com restrição de acesso por channel
+- Ferramenta de mensagem de saída suporta anexos de mídia
+- Timestamps `created_at` por mensagem preservados no bootstrap do histórico (#2946)
+- Orçamento de descarte por backpressure apenas para streams de áudio no message bus
+- Retry de erros transitórios de LLM (#2991)
+- Expansão de skills do agent PicoClaw (#2994)
+
+#### Channels
+- Larksuite (Feishu) adaptado para oapi-sdk-go v3.9.4 (#3008)
+
+#### Internacionalização
+- Locale tcheco (cs) (#2932)
+- Locale bengali (bn-IN) (#2974)
+
+### Correções de Bugs
+
+- Corrigida estabilidade do loop do agent substituindo WaitGroup por contador baseado em Cond (#2904)
+- Corrigido health check sempre retornando not-ready
+- Corrigida perda de chamadas de ferramenta em streaming do Codex (#3007)
+- Corrigido roteamento de resposta em grupo do OneBot via chatID prefixado (#3009)
+- Corrigido download de mídia de entrada privada do OneBot
+- Corrigido download de imagens do Discord
+- Corrigido tratamento de mensagens de localização do Telegram (#3052)
+- Corrigida ferramenta exec rejeitando caminhos relativos ao workspace (#3087)
+- Corrigido comportamento da API `os.Root` no Windows (#3089)
+- Corrigida persistência de `dm_scope` e isolamento de sessão em runtime (#3067)
+- Corrigido bypass de allowlist do launcher e parsing de IP de cliente via trusted-proxy
+- Corrigido regex de busca sogou para a nova estrutura HTML (#3139)
+- Reforçadas type assertions e tratamento de erros de `Close()` em agent, tools, channels, context, config, seahorse e updater
+
+### Build e Operações
+
+- Go atualizado para 1.25.11 (#2997)
+- modelcontextprotocol/go-sdk atualizado para 1.6.1
+
+### Changelog completo
+- [GitHub v0.2.9...v0.3.0](https://github.com/sipeed/picoclaw/compare/v0.2.9...v0.3.0)
+---
+
 ## v0.2.9
 
 *Lançado: 2026-05-24*

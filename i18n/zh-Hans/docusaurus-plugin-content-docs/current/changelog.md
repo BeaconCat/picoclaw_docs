@@ -9,6 +9,72 @@ PicoClaw 的所有重要更新记录。
 
 ---
 
+## v0.3.0
+
+*发布日期：2026-06-15*
+
+### 核心亮点
+
+- **稳定性与健壮性加固**：覆盖 agent、tools、channels、context 的全面健壮性整治——安全的类型断言保护、显式 `Close()` 错误处理、防 panic，以及瞬态 LLM 错误重试（#2991）
+- **Provider 扩展**：新增原生 Kagi 网络搜索 Provider 和 Azure OpenAI 托管身份（Entra ID）认证（#3037、#2971）
+- **Web 控制台**：聊天图片粘贴与拖拽上传、代码块行号及换行切换、输入框 Shift+Enter 提示（#2933）
+- **Cron 工具**：新增 `get`/`update` 动作，支持按 channel 的访问控制
+- **安全**：Launcher 访问控制加固、SSRF 防护扩展至 198.18.0.0/15、无 scheme URL 的工作区防护（#3085）
+
+### 新功能
+
+#### Provider 与模型
+- 原生 Kagi 网络搜索 Provider（#3037）
+- Azure OpenAI 托管身份（Entra ID）认证（#2971）
+- DeepSeek thinking 字段映射（OpenAI 兼容流式）（#2928）
+- MiMo Provider 通用模型目录（#2915）
+- 规范化 Claude Sonnet 模型 ID（#3036）
+
+#### Web 控制台
+- 聊天图片粘贴与拖拽上传（#2939）
+- 代码块行号与换行切换（#2933）
+- 输入框下方 Shift+Enter 提示
+
+#### 核心与 Agent
+- Cron 工具 `get`/`update` 动作，按 channel 限制访问
+- 出站 message 工具支持媒体附件
+- 历史引导时保留每条消息的 `created_at` 时间戳（#2946）
+- 消息总线仅针对音频流的背压丢弃预算
+- 瞬态 LLM 错误重试（#2991）
+- PicoClaw agent 技能扩展（#2994）
+
+#### Channel
+- 飞书（Larksuite）适配 oapi-sdk-go v3.9.4（#3008）
+
+#### 本地化
+- 捷克语（cs）（#2932）
+- 孟加拉语（bn-IN）（#2974）
+
+### Bug 修复
+
+- 修复 agent loop 稳定性，以 Cond 计数器替代 WaitGroup（#2904）
+- 修复健康检查始终返回 not-ready
+- 修复 Codex 流式工具调用丢失（#3007）
+- 修复 OneBot 群聊回复路由（prefixed chatID）（#3009）
+- 修复 OneBot 私信入站媒体被下载
+- 修复 Discord 图片下载
+- 修复 Telegram 位置消息处理（#3052）
+- 修复 exec 工具拒绝工作区相对路径（#3087）
+- 修复 Windows 上 `os.Root` API 行为（#3089）
+- 修复 `dm_scope` 持久化与运行时会话隔离（#3067）
+- 修复 Launcher 白名单绕过与受信代理客户端 IP 解析
+- 修复 sogou 搜索正则以匹配新 HTML 结构（#3139）
+- 加固 agent、tools、channels、context、config、seahorse、updater 的类型断言与 `Close()` 错误处理
+
+### 构建与运维
+
+- Go 升级至 1.25.11（#2997）
+- modelcontextprotocol/go-sdk 升级至 1.6.1
+
+### 完整更新日志
+- [GitHub v0.2.9...v0.3.0](https://github.com/sipeed/picoclaw/compare/v0.2.9...v0.3.0)
+---
+
 ## v0.2.9
 
 *发布日期：2026-05-24*

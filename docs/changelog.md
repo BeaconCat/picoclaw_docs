@@ -9,6 +9,72 @@ All notable changes to PicoClaw are documented here.
 
 ---
 
+## v0.3.0
+
+*Released: 2026-06-15*
+
+### Highlights
+
+- **Reliability & Hardening**: Sweeping robustness pass across agent, tools, channels, and context — safe type-assertion guards, explicit `Close()` error handling, panic-safety, and transient LLM error retry (#2991)
+- **Provider Expansion**: Native Kagi web search provider and Azure OpenAI managed-identity (Entra ID) authentication (#3037, #2971)
+- **Web Console**: Chat image paste and drag-and-drop upload, code block line numbers with wrap toggle, and a shift-enter composer hint (#2933)
+- **Cron Tool**: Added `get` and `update` actions with per-channel access control
+- **Security**: Launcher access-control hardening, SSRF guard extended to 198.18.0.0/15, and scheme-less URL workspace guard (#3085)
+
+### Features
+
+#### Providers & Models
+- Native Kagi web search provider (#3037)
+- Azure OpenAI managed identity (Entra ID) authentication (#2971)
+- DeepSeek thinking-field mapping for OpenAI-compatible streaming (#2928)
+- CommonModels catalog for the MiMo provider (#2915)
+- Canonical Claude Sonnet model ID (#3036)
+
+#### Web Console
+- Chat image paste and drag-and-drop upload (#2939)
+- Code block line numbers and wrap toggle (#2933)
+- Shift-enter hint below the chat composer
+
+#### Core & Agent
+- Cron tool `get`/`update` actions with per-channel access restriction
+- Outbound message tool supports media attachments
+- Per-message `created_at` timestamps preserved across history bootstrap (#2946)
+- Audio-stream-only backpressure drop budget on the message bus
+- Transient LLM error retry (#2991)
+- PicoClaw agent skill expansion (#2994)
+
+#### Channels
+- Larksuite (Feishu) adapted to oapi-sdk-go v3.9.4 (#3008)
+
+#### Internationalization
+- Czech (cs) locale (#2932)
+- Bangla (bn-IN) locale (#2974)
+
+### Bug Fixes
+
+- Fixed agent loop stability by replacing WaitGroup with a Cond-based counter (#2904)
+- Fixed health check always returning not-ready
+- Fixed streamed Codex tool calls being dropped (#3007)
+- Fixed OneBot group reply routing via prefixed chatID (#3009)
+- Fixed OneBot private inbound media being fetched
+- Fixed Discord image download
+- Fixed Telegram location message handling (#3052)
+- Fixed exec tool rejecting workspace-relative paths (#3087)
+- Fixed `os.Root` API behavior on Windows (#3089)
+- Fixed `dm_scope` persistence and runtime session isolation (#3067)
+- Fixed launcher allowlist bypass and trusted-proxy client IP parsing
+- Fixed sogou search regex for new HTML structure (#3139)
+- Hardened type assertions and `Close()` error handling across agent, tools, channels, context, config, seahorse, and updater
+
+### Build & Ops
+
+- Go bumped to 1.25.11 (#2997)
+- modelcontextprotocol/go-sdk upgraded to 1.6.1
+
+### Full changelog
+- [GitHub v0.2.9...v0.3.0](https://github.com/sipeed/picoclaw/compare/v0.2.9...v0.3.0)
+---
+
 ## v0.2.9
 
 *Released: 2026-05-24*
